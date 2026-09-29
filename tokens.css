@@ -1,0 +1,109 @@
+/* MTO Job Accelerator — design tokens */
+/* Token-driven. No magic numbers outside this file. */
+:root {
+  /* Colors */
+  --color-background: #FFFFFF; /* color-3 */
+  --color-text-primary: #000000; /* color-1 */
+  --color-text-light: #C5C1B9; /* color-2 */
+
+  /* Aliases per Do: use color.text.primary, not raw hex */
+  --color-text-primary-alias: var(--color-text-primary);
+  --color-surface: var(--color-background);
+
+  /* Typography — Poppins, Inter, CameraPlainVariable */
+  --font-poppins: "Poppins", "Inter", system-ui, sans-serif;
+  --font-inter: "Inter", "Poppins", system-ui, sans-serif;
+  --font-camera: "CameraPlainVariable", "Inter", system-ui, sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 30px;
+  --text-2xl: 44px;
+  --text-3xl: 60px;
+
+  --weight-400: 400;
+  --weight-500: 500;
+  --weight-600: 600;
+  --weight-700: 700;
+  --weight-800: 800;
+
+  --leading-12: 12px;
+  --leading-16: 16px;
+  --leading-18: 18px;
+  --leading-20: 20px;
+  --leading-24: 24px;
+  --leading-28: 28px;
+  --leading-2925: 29.25px;
+  --leading-36: 36px;
+  --leading-484: 48.4px;
+  --leading-648: 64.8px;
+
+  /* Spacing — base 8px, scale only */
+  --space-1: 4px;
+  --space-2: 6px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 14px;
+  --space-7: 16px;
+  --space-8: 20px;
+  --space-9: 24px;
+  --space-10: 32px;
+  --space-11: 40px;
+  --space-12: 48px;
+  --space-13: 56px;
+  --space-14: 64px;
+  --space-15: 112px;
+  --space-16: 144px;
+  --space-17: 152px;
+
+  /* Shapes — pinned set only */
+  --radius-sm: 0px 6px 6px 0px;
+  --radius-md: 999px;
+  --radius-lg: 6px 0px 0px 6px;
+  --radius-xl: 6px;
+  --radius-full: 12px;
+  --radius-6: 14px;
+  --radius-7: 18px;
+  --radius-8: 22px;
+  --radius-9: 32px;
+
+  /* Elevation */
+  --shadow-sm: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.1) 0px 1px 2px -1px;
+  --shadow-md: rgba(0, 0, 0, 0.88) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 2px 2px -1px, rgba(0, 0, 0, 0.08) 0px 4px 4px -2px, rgba(0, 0, 0, 0.08) 0px 8px 8px -4px, rgba(0, 0, 0, 0.08) 0px 16px 16px -8px;
+  --shadow-lg: oklch(0.21 0.043 265.75 / 0.04) 0px 1px 2px 0px, oklch(0.21 0.043 265.75 / 0.14) 0px 12px 32px -12px;
+  --shadow-xl: oklab(0.546 -0.0276403 -0.22128 / 0.55) 0px 18px 45px -18px;
+  --shadow-5: oklch(0.21 0.043 265.75 / 0.28) 0px 24px 60px -24px;
+
+  /* Motion */
+  --duration-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-color: 0.2s;
+  --duration-transform: 0.1s;
+
+  /* Layout and stroke — centralized to avoid magic numbers in components */
+  --layout-container: 1120px;
+  --layout-form: 560px;
+  --stroke-thin: 1px;
+  --focus-ring: 3px;
+  --focus-offset: 2px;
+  --focus-offset-wide: 3px;
+  --lift-hover: -1px;
+  --offscreen: -9999px;
+  --opacity-muted: 0.78;
+  --opacity-loading: 0.7;
+  --z-header: 10;
+  --z-skip: 100;
+
+  /* Fluid type — centralized clamps so components stay token-driven */
+  --text-3xl-fluid: clamp(36px, 12px + 6vw, 60px);
+  --leading-3xl-fluid: clamp(40px, 12px + 7vw, 64.8px);
+  --text-2xl-fluid: clamp(30px, 14px + 4vw, 44px);
+  --leading-2xl-fluid: clamp(36px, 14px + 4.4vw, 48.4px);
+
+  /* Anchor offset for sticky header + image placeholder */
+  --anchor-offset: 72px;
+  --img-bg: var(--color-text-light);
+}
