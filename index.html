@@ -89,7 +89,14 @@
 
 <main id="main">
   <!-- Hero -->
-  <section class="container hero" aria-labelledby="hero-title">
+  <section class="hero hero--video" aria-labelledby="hero-title">
+    <div class="hero-video-frame" aria-hidden="true">
+      <video class="hero-video" autoplay muted loop playsinline preload="metadata" poster="./assets/hero-students.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback>
+        <source src="./assets/video/WhatsApp%20Video%202026-09-30%20at%2011.54.22%20AM.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-inner">
     <span class="pill">Competency certified · 10 assessed competencies</span>
     <div class="hero-grid" style="margin-top: var(--space-8)">
       <div>
@@ -121,6 +128,7 @@
       <div><p class="eyebrow">Hiring companies our candidates target</p><ul class="strip-row"><li>FMCG leaders</li><li>Top private banks</li><li>Telecom operators</li><li>Tech firms</li><li>Manufacturers</li></ul></div>
       <div><p class="eyebrow">Typical applicant backgrounds</p><ul class="strip-row"><li>Public universities</li><li>Private universities</li><li>Business schools</li><li>Engineering schools</li></ul></div>
       <div><p class="eyebrow">Mentor backgrounds we aim to include</p><ul class="strip-row"><li>HR leaders</li><li>MT alumni</li><li>Assessment experts</li><li>Recruiters</li></ul></div>
+    </div>
     </div>
   </section>
 

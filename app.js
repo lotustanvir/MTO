@@ -117,6 +117,21 @@
     counters.forEach(animate);
   }
 
+  // Hero background video: respect reduced motion, best-effort autoplay.
+  // Markup already sets autoplay/muted/loop/playsinline + poster fallback.
+  var heroVideo = document.querySelector(".hero-video");
+  if (heroVideo) {
+    try {
+      if (reduceMotion) {
+        heroVideo.removeAttribute("autoplay");
+        heroVideo.pause();
+      } else {
+        var playPromise = heroVideo.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
+      }
+    } catch (e) {}
+  }
+
   // Plan selection: ?plan=masterclass|accelerator, pricing buttons, form select
   var planSelect = document.getElementById("plan");
   var planNote = document.getElementById("planNote");

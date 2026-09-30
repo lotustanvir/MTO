@@ -218,6 +218,134 @@ footer { border-top: var(--stroke-thin) solid var(--color-text-light); padding-t
 .consent { display: flex; gap: var(--space-5); align-items: flex-start; font-size: var(--text-sm); }
 .consent input { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn-primary:hover { transform: none; } }
+/* Hero video background (index hero only).
+   Layering: frame+video (z:0) -> dark gradient overlay (z:1) -> existing content (z:2).
+   Strategy: controlled responsive frame. .hero--video height is content-driven
+   (NO 92svh — that made the hero/video excessively tall). .hero-video-frame is an
+   absolute inset:0 letterbox stage on the existing dark background; .hero-video
+   fills that stage with object-fit:contain + centered 16:9 so the SAME full-frame
+   composition scales down/up on every viewport instead of cover-zooming into
+   different crops. Empty space (if any) is dark letterboxing, never stretch.
+   Preserves existing hero-grid, spacing, typography and buttons; only adapts
+   foreground color/borders for readability over video. */
+.hero--video {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  min-height: 0;
+  max-width: 100%;
+  background: var(--color-text-primary);
+  color: #fff;
+}
+.hero-video-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--color-text-primary);
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center center;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--color-text-primary);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.55) 45%, rgba(0, 0, 0, 0.68) 100%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+/* Readability over video: keep fonts/sizes, adapt colors only. */
+.hero--video h1,
+.hero--video .eyebrow,
+.hero--video .subhead,
+.hero--video .caption,
+.hero--video .stat-label {
+  color: #fff;
+}
+.hero--video .muted {
+  color: #fff;
+  opacity: 0.88;
+}
+.hero--video .pill {
+  border-color: rgba(255, 255, 255, 0.75);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.hero--video .stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  box-shadow: none;
+}
+.hero--video .strip-row li {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.hero--video .btn-primary {
+  border-color: #fff;
+}
+.hero--video .btn-secondary {
+  border-color: #fff;
+}
+/* Responsive Hero frame — reuses project breakpoints (700 / 900 / 1100) plus a
+   1440px desktop cap. object-fit + object-position NEVER change across
+   breakpoints: always `contain` + `center center`, so the same 16:9 composition
+   (measured asset ~848x478, ~16:9) is recognizable at 390 / 768 / 1366 / 1536 /
+   1920. Only the content-driven Hero height/padding adapts; video height can
+   never exceed Hero height, so it never grows taller than the viewport. */
+/* Mobile (<700px, covers 390x844): stacked content drives Hero height; 16:9
+   video fits by width, centered, dark letterbox top/bottom. No squash, no zoom,
+   no horizontal scroll. */
+@media (max-width: 699px) {
+  .hero-video {
+    object-position: center center;
+  }
+}
+/* Tablet (700px+, covers 768x1024): same contained frame, scaled up
+   proportionally; center content stays visible. */
+@media (min-width: 700px) {
+  .hero-video {
+    object-fit: contain;
+    object-position: center center;
+  }
+}
+/* Laptop (900px+, covers 1366x768): existing 2-col hero-grid; entire video
+   remains visible, height capped by content height (not viewport). */
+@media (min-width: 900px) {
+  .hero-video {
+    object-fit: contain;
+    object-position: center center;
+  }
+}
+/* Desktop / large desktop (1440px+, covers 1536x864 and 1920x1080): Hero stays
+   a balanced landing Hero (padding from .hero, container max 1120px, fluid
+   type untouched). Wide viewports get dark side letterboxing instead of a
+   taller/zoomed video — composition unchanged. */
+@media (min-width: 1440px) {
+  .hero-video {
+    object-fit: contain;
+    object-position: center center;
+  }
+}
 /* Leadership (F1): center the single member card on tablet/desktop.
    Scoped to .leadership-grid only; global .card-grid and mobile behavior unchanged. */
 @media (min-width: 700px) and (max-width: 1099px) {
